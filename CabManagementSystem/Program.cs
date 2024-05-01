@@ -10,7 +10,8 @@ namespace CabManagementSystem
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(); // Create a CarManager instance
+            // Create a CarManager instance
+            CarManager carManager = new CarManager();
 
             // Create cars and add them to the CarManager
             Car car1 = new Car(1, "Toyota Camry", "ABC123", true);
@@ -24,7 +25,22 @@ namespace CabManagementSystem
 
             // Display available cars
             carManager.ViewAvailableCars();
-            carManager.ViewUnavailableCars();
+
+            // Create a Customer instance
+            Customer customer1 = new Customer(1, "John Doe", "1234567890", "CurrentLocation", "Destination");
+
+            // Display customer details
+            Console.WriteLine("\nCustomer Details:");
+            Console.WriteLine(customer1.GetDetails());
+
+            // View available cars
+            customer1.ViewAvailableCars();
+
+            // View available drivers
+            customer1.ViewAvailableDrivers();
+
+            // Place an order
+            customer1.PlaceOrder();
         }
     }
 }

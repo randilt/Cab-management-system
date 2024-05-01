@@ -9,11 +9,13 @@ namespace CabManagementSystem
     internal class CarManager
     {
         private List<Car> cars;
+        private List<Driver> drivers;
 
         // Constructor
         public CarManager()
         {
             cars = new List<Car>();
+            drivers = new List<Driver>();
         }
 
         // Method to add a new car
@@ -51,6 +53,36 @@ namespace CabManagementSystem
                     Console.WriteLine(car.GetDetails());
                 }
             }
+        }
+        public void ViewAvailableDrivers()
+        {
+               Console.WriteLine("Available Drivers:");
+            foreach (Driver driver in drivers)
+            {
+                if (driver.Availability)
+                {
+                    Console.WriteLine(driver.GetDetails());
+                }
+            }
+        }
+        public void ViewUnavailableDrivers()
+        {
+            Console.WriteLine("Unavailable Drivers:");
+            foreach (Driver driver in drivers)
+            {
+                if (!driver.Availability)
+                {
+                    Console.WriteLine(driver.GetDetails());
+                }
+            }
+        }
+        public void AddDriver(Driver driver)
+        {
+            drivers.Add(driver);
+        }
+        public void RemoveDriver(Driver driver)
+        {
+            drivers.Remove(driver);
         }
 
     }
