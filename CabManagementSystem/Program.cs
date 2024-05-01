@@ -10,32 +10,21 @@ namespace CabManagementSystem
     {
         static void Main(string[] args)
         {
+            CarManager carManager = new CarManager(); // Create a CarManager instance
+
+            // Create cars and add them to the CarManager
             Car car1 = new Car(1, "Toyota Camry", "ABC123", true);
+            carManager.AddCar(car1);
 
-            // Display car details
-            Console.WriteLine("Car Details:");
-            Console.WriteLine(car1.GetDetails());
+            Car car2 = new Car(2, "Honda Civic", "XYZ789", true);
+            carManager.AddCar(car2);
 
-            // Create a driver
-            Driver driver1 = new Driver(1, "John Doe", "1234567890", true);
+            Car car3 = new Car(3, "Ford Mustang", "DEF456", false);
+            carManager.AddCar(car3);
 
-            // Display driver details
-            Console.WriteLine("\nDriver Details:");
-            Console.WriteLine(driver1.GetDetails());
-
-            // Assign the driver to the car
-            car1.SetAssignedDriver(driver1);
-
-            // Display updated car details
-            Console.WriteLine("\nCar Details after assigning driver:");
-            Console.WriteLine(car1.GetDetails());
-
-            // Update availability of the driver
-            driver1.UpdateAvailability(false);
-
-            // Display updated driver details
-            Console.WriteLine("\nDriver Details after updating availability:");
-            Console.WriteLine(driver1.GetDetails());
+            // Display available cars
+            carManager.ViewAvailableCars();
+            carManager.ViewUnavailableCars();
         }
     }
 }

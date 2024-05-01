@@ -8,11 +8,13 @@ namespace CabManagementSystem
 {
     internal class Car
     {
+
         private int carId;
         private string model;
         private string plateNumber;
         private bool availability;
         private Driver assignedDriver;
+
 
         public int CarId
         {
