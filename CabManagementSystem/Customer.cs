@@ -32,22 +32,30 @@ namespace CabManagementSystem
             return details;
         }
 
-        // Method to view available cars
-        public void ViewAvailableCars()
-        {
-            // Implementation to view available cars
-        }
-
-        // Method to view available drivers
-        public void ViewAvailableDrivers()
-        {
-            // Implementation to view available drivers
-        }
-
         // Method to place an order
-        public void PlaceOrder()
+        // Method to place an order and update availability of driver and car
+        public Order PlaceOrder(Driver selectedDriver, Car selectedCar, DateTime date)
         {
-            // Implementation to place an order
+            // Check if the selected driver and car are available
+            if (selectedDriver.Availability && selectedCar.Availability)
+            {
+                // Create a new order
+                Order order = new Order(OrderIdGenerator.GenerateOrderId(), this, selectedDriver, date);
+
+                // Update the availability status of the car and driver
+                selectedCar.UpdateAvailability(false);
+                selectedDriver.UpdateAvailability(false);
+
+                // Set the assigned driver for the car
+                selectedCar.SetAssignedDriver(selectedDriver);
+
+                return order;
+            }
+            else
+            {
+                Console.WriteLine("Selected driver or car is not available.");
+                return null;
+            }
         }
     }
 }

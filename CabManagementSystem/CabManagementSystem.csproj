@@ -48,6 +48,8 @@
     <Compile Include="CarManager.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderIdGenerator.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

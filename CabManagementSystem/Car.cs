@@ -67,6 +67,11 @@ namespace CabManagementSystem
             AssignedDriver = driver;
             driver.AssignedCar = this; // Update the AssignedCar property of the driver
         }
+        // Method to update the assigned driver for the car
+        public void UpdateAssignedDriver(Driver driver)
+        {
+            AssignedDriver = driver;
+        }
 
         // Method to get details of the car
         public string GetDetails()

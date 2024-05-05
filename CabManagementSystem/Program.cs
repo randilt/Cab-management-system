@@ -10,37 +10,51 @@ namespace CabManagementSystem
     {
         static void Main(string[] args)
         {
-            // Create a CarManager instance
+            // Create car manager instance
             CarManager carManager = new CarManager();
 
-            // Create cars and add them to the CarManager
+            // Add some cars and drivers
             Car car1 = new Car(1, "Toyota Camry", "ABC123", true);
-            carManager.AddCar(car1);
-
             Car car2 = new Car(2, "Honda Civic", "XYZ789", true);
+            Driver driver1 = new Driver(101, "John Doe", "1234567890", true);
+            Driver driver2 = new Driver(102, "Jane Doe", "0987654321", true);
+
+            carManager.AddCar(car1);
             carManager.AddCar(car2);
+            carManager.AddDriver(driver1);
+            carManager.AddDriver(driver2);
 
-            Car car3 = new Car(3, "Ford Mustang", "DEF456", false);
-            carManager.AddCar(car3);
+            // Display available cars and drivers before placing order
 
-            // Display available cars
             carManager.ViewAvailableCars();
+            Console.WriteLine();
 
-            // Create a Customer instance
-            Customer customer1 = new Customer(1, "John Doe", "1234567890", "CurrentLocation", "Destination");
+            carManager.ViewAvailableDrivers();
+            Console.WriteLine();
 
-            // Display customer details
-            Console.WriteLine("\nCustomer Details:");
-            Console.WriteLine(customer1.GetDetails());
-
-            // View available cars
-            customer1.ViewAvailableCars();
-
-            // View available drivers
-            customer1.ViewAvailableDrivers();
+            // Create a customer
+            Customer customer = new Customer(201, "Alice", "9876543210", "A", "B");
+            Customer customer1 = new Customer(202, "Bob", "9876543211", "B", "C");
 
             // Place an order
-            customer1.PlaceOrder();
+            Order order = customer.PlaceOrder(driver1, car1, DateTime.Now);
+            Order order2 = customer1.PlaceOrder(driver2, car2, DateTime.Now);
+
+            // Display details of the order placed
+            carManager.PlaceOrder(order);
+            carManager.PlaceOrder(order2);
+
+            // Display updated availability of cars and drivers after placing order
+            Console.WriteLine("Updated Availability:");
+            carManager.ViewAvailableCars();
+            carManager.ViewAvailableDrivers();
+            Console.WriteLine();
+
+            // Display current orders placed
+            Console.WriteLine("Current Orders Placed:");
+            carManager.DisplayCurrentOrders();
         }
+
+  
     }
 }
