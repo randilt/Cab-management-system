@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CabManagementSystemGUI.Properties
+namespace CabManagementGUI.Properties
 {
 
 

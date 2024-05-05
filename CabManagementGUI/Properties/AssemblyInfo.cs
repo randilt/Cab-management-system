@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CabManagementSystemGUI")]
+[assembly: AssemblyTitle("CabManagementGUI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CabManagementSystemGUI")]
+[assembly: AssemblyProduct("CabManagementGUI")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("88cb2656-b4bc-429c-8a7d-f901ffa7392d")]
+[assembly: Guid("4c9ed94e-1bc3-4036-9ac1-193a4ddc1e22")]
 
 // Version information for an assembly consists of the following four values:
 //
