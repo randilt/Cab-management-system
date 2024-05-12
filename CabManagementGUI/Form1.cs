@@ -32,13 +32,25 @@ namespace CabManagementGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UserController userController = new UserController();
+            UserController userController = new UserController(this);
             string username = textBoxUsername.Text.ToString();
             string password = textBoxPassword.Text.ToString();
 
             userController.AuthenticateUser(username, password);
+            
 
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }
 }
+
