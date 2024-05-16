@@ -10,8 +10,7 @@ using System.Windows.Forms;
 namespace CabManagementGUI
 {
     internal class UserController
-    {
-        private string DB_CONNECTION_STRING = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\testl\Desktop\SDAM_Assignment\CabManagementSystem\CabManagementDB.mdf;Integrated Security=True;Connect Timeout=30";
+    { 
         private Form1 form1; // Reference to Form1
 
         public UserController(Form1 form1)
@@ -25,8 +24,10 @@ namespace CabManagementGUI
 
             if (userModel.Login(username, password))
             {
-                SqlConnection connection = new SqlConnection();
-                connection.ConnectionString = DB_CONNECTION_STRING;
+                // Create a new instance of the DBConnector class
+                DBConnector dbConnector = new DBConnector();
+                // Create a connection to the database
+                SqlConnection connection = dbConnector.GetConnection();
                 connection.Open();
 
                 // check if user exists in database

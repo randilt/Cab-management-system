@@ -34,7 +34,19 @@ namespace CabManagementGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            string customerName, customerNIC, customerPhone, customerEmail;
+            customerName = textBoxCustName.Text.ToString();
+            customerNIC = textBoxCustNIC.Text.ToString();
+            customerPhone = textBoxCustContact.Text.ToString();
+            customerEmail = textBoxCustEmail.Text.ToString();
+            if (customerName == "" || customerNIC == "" || customerPhone == "" || customerEmail == "")
+            {
+                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Customer Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
