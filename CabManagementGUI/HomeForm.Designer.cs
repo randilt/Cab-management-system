@@ -30,12 +30,12 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -63,6 +63,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Car Management";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 31);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(490, 52);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Manage Cars";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button3);
@@ -72,6 +81,15 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Order Management";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 32);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(490, 52);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Manage Orders";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -83,6 +101,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Customer Management";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 31);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(490, 52);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "Manage Customers";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button5);
@@ -92,33 +120,6 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Driver Management";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 31);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(490, 52);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Manage Cars";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(6, 32);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(490, 52);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Manage Orders";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(6, 31);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(490, 52);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Manage Customers";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 

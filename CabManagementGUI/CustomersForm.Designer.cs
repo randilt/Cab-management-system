@@ -153,14 +153,14 @@
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Location = new System.Drawing.Point(12, 472);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(712, 182);
+            this.groupBox4.Size = new System.Drawing.Size(775, 182);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Add Customer";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(570, 105);
+            this.button4.Location = new System.Drawing.Point(643, 105);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(115, 28);
             this.button4.TabIndex = 10;
@@ -169,7 +169,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(570, 70);
+            this.button3.Location = new System.Drawing.Point(643, 70);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(115, 28);
             this.button3.TabIndex = 9;
@@ -178,7 +178,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(570, 30);
+            this.button2.Location = new System.Drawing.Point(643, 30);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(115, 28);
             this.button2.TabIndex = 3;
@@ -189,7 +189,7 @@
             // textBoxCustEmail
             // 
             this.textBoxCustEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustEmail.Location = new System.Drawing.Point(162, 136);
+            this.textBoxCustEmail.Location = new System.Drawing.Point(193, 133);
             this.textBoxCustEmail.Name = "textBoxCustEmail";
             this.textBoxCustEmail.Size = new System.Drawing.Size(370, 28);
             this.textBoxCustEmail.TabIndex = 8;
@@ -197,7 +197,7 @@
             // textBoxCustNIC
             // 
             this.textBoxCustNIC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustNIC.Location = new System.Drawing.Point(162, 102);
+            this.textBoxCustNIC.Location = new System.Drawing.Point(193, 99);
             this.textBoxCustNIC.Name = "textBoxCustNIC";
             this.textBoxCustNIC.Size = new System.Drawing.Size(370, 28);
             this.textBoxCustNIC.TabIndex = 7;
@@ -205,7 +205,7 @@
             // textBoxCustContact
             // 
             this.textBoxCustContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustContact.Location = new System.Drawing.Point(162, 67);
+            this.textBoxCustContact.Location = new System.Drawing.Point(193, 64);
             this.textBoxCustContact.Name = "textBoxCustContact";
             this.textBoxCustContact.Size = new System.Drawing.Size(370, 28);
             this.textBoxCustContact.TabIndex = 6;
@@ -213,7 +213,7 @@
             // textBoxCustName
             // 
             this.textBoxCustName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustName.Location = new System.Drawing.Point(162, 30);
+            this.textBoxCustName.Location = new System.Drawing.Point(193, 27);
             this.textBoxCustName.Name = "textBoxCustName";
             this.textBoxCustName.Size = new System.Drawing.Size(370, 28);
             this.textBoxCustName.TabIndex = 5;

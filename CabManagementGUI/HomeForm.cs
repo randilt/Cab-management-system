@@ -21,5 +21,13 @@ namespace CabManagementGUI
         {
             Application.Exit();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // open CustomerForm.cs
+            CustomersForm customersForm = new CustomersForm();
+            customersForm.Show();
+            
+        }
     }
 }
