@@ -31,9 +31,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.dataGridViewFiltered = new System.Windows.Forms.DataGridView();
+            this.dataGridViewAllCustomers = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -49,88 +49,98 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.radioBtnCustID = new System.Windows.Forms.RadioButton();
+            this.radioBtnCustEmail = new System.Windows.Forms.RadioButton();
+            this.radioBtnCustPhone = new System.Windows.Forms.RadioButton();
+            this.radioBtnCustName = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFiltered)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllCustomers)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBoxSearch);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(584, 90);
+            this.groupBox1.Size = new System.Drawing.Size(584, 132);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Customers";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(458, 43);
+            this.button1.Location = new System.Drawing.Point(416, 17);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 28);
+            this.button1.Size = new System.Drawing.Size(150, 28);
             this.button1.TabIndex = 2;
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(301, 16);
+            this.label1.Size = new System.Drawing.Size(344, 16);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Search Customers By ID, E-mail or Phone number";
+            this.label1.Text = "Search Customers By Name, ID, E-mail or Phone number";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(9, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(440, 28);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSearch.Location = new System.Drawing.Point(6, 41);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(572, 28);
+            this.textBoxSearch.TabIndex = 0;
+            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // dataGridView1
+            // dataGridViewFiltered
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 21);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(593, 279);
-            this.dataGridView1.TabIndex = 1;
+            this.dataGridViewFiltered.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFiltered.Location = new System.Drawing.Point(6, 21);
+            this.dataGridViewFiltered.Name = "dataGridViewFiltered";
+            this.dataGridViewFiltered.RowHeadersWidth = 51;
+            this.dataGridViewFiltered.RowTemplate.Height = 24;
+            this.dataGridViewFiltered.Size = new System.Drawing.Size(593, 279);
+            this.dataGridViewFiltered.TabIndex = 1;
+            this.dataGridViewFiltered.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // dataGridView2
+            // dataGridViewAllCustomers
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 24);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(663, 372);
-            this.dataGridView2.TabIndex = 2;
+            this.dataGridViewAllCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAllCustomers.Location = new System.Drawing.Point(6, 24);
+            this.dataGridViewAllCustomers.Name = "dataGridViewAllCustomers";
+            this.dataGridViewAllCustomers.RowHeadersWidth = 51;
+            this.dataGridViewAllCustomers.RowTemplate.Height = 24;
+            this.dataGridViewAllCustomers.Size = new System.Drawing.Size(773, 414);
+            this.dataGridViewAllCustomers.TabIndex = 2;
+            this.dataGridViewAllCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAllCustomers_CellContentClick);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView2);
+            this.groupBox2.Controls.Add(this.dataGridViewAllCustomers);
             this.groupBox2.Location = new System.Drawing.Point(617, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(675, 402);
+            this.groupBox2.Size = new System.Drawing.Size(782, 444);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "All Customers";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.dataGridView1);
-            this.groupBox3.Location = new System.Drawing.Point(12, 108);
+            this.groupBox3.Controls.Add(this.dataGridViewFiltered);
+            this.groupBox3.Location = new System.Drawing.Point(12, 150);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(605, 306);
             this.groupBox3.TabIndex = 4;
@@ -267,11 +277,69 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Customer Name";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.radioBtnCustName);
+            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Controls.Add(this.radioBtnCustPhone);
+            this.groupBox5.Controls.Add(this.radioBtnCustEmail);
+            this.groupBox5.Controls.Add(this.radioBtnCustID);
+            this.groupBox5.Location = new System.Drawing.Point(6, 75);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(572, 51);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Filter by";
+            // 
+            // radioBtnCustID
+            // 
+            this.radioBtnCustID.AutoSize = true;
+            this.radioBtnCustID.Location = new System.Drawing.Point(101, 21);
+            this.radioBtnCustID.Name = "radioBtnCustID";
+            this.radioBtnCustID.Size = new System.Drawing.Size(41, 20);
+            this.radioBtnCustID.TabIndex = 0;
+            this.radioBtnCustID.TabStop = true;
+            this.radioBtnCustID.Text = "ID";
+            this.radioBtnCustID.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnCustEmail
+            // 
+            this.radioBtnCustEmail.AutoSize = true;
+            this.radioBtnCustEmail.Location = new System.Drawing.Point(170, 21);
+            this.radioBtnCustEmail.Name = "radioBtnCustEmail";
+            this.radioBtnCustEmail.Size = new System.Drawing.Size(62, 20);
+            this.radioBtnCustEmail.TabIndex = 1;
+            this.radioBtnCustEmail.TabStop = true;
+            this.radioBtnCustEmail.Text = "Email";
+            this.radioBtnCustEmail.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnCustPhone
+            // 
+            this.radioBtnCustPhone.AutoSize = true;
+            this.radioBtnCustPhone.Location = new System.Drawing.Point(263, 21);
+            this.radioBtnCustPhone.Name = "radioBtnCustPhone";
+            this.radioBtnCustPhone.Size = new System.Drawing.Size(91, 20);
+            this.radioBtnCustPhone.TabIndex = 2;
+            this.radioBtnCustPhone.TabStop = true;
+            this.radioBtnCustPhone.Text = "Phone No.";
+            this.radioBtnCustPhone.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnCustName
+            // 
+            this.radioBtnCustName.AutoSize = true;
+            this.radioBtnCustName.Location = new System.Drawing.Point(12, 21);
+            this.radioBtnCustName.Name = "radioBtnCustName";
+            this.radioBtnCustName.Size = new System.Drawing.Size(65, 20);
+            this.radioBtnCustName.TabIndex = 3;
+            this.radioBtnCustName.TabStop = true;
+            this.radioBtnCustName.Text = "Name";
+            this.radioBtnCustName.UseVisualStyleBackColor = true;
+            // 
             // CustomersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1300, 666);
+            this.ClientSize = new System.Drawing.Size(1402, 666);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -281,12 +349,14 @@
             this.Load += new System.EventHandler(this.CustomersForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFiltered)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllCustomers)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -295,10 +365,10 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridViewFiltered;
+        private System.Windows.Forms.DataGridView dataGridViewAllCustomers;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -314,5 +384,11 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.RadioButton radioBtnCustName;
+        private System.Windows.Forms.RadioButton radioBtnCustPhone;
+        private System.Windows.Forms.RadioButton radioBtnCustEmail;
+        private System.Windows.Forms.RadioButton radioBtnCustID;
     }
 }
