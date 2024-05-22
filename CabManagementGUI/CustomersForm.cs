@@ -62,7 +62,7 @@ namespace CabManagementGUI
                 try
                 {
                     // Create an instance of the Customer class with provided details
-                    Customer customer = new Customer(customerName, customerPhone, customerEmail, customerNIC);
+                    Customer customer = new Customer(1,customerName, customerPhone, customerEmail, customerNIC);
 
                     // Call the AddCustomer method to add the customer to the database
                     customer.AddCustomer();

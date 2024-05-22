@@ -26,6 +26,13 @@ namespace CabManagementGUI
             set { _availability = value; }
         }
 
+        public string DriverName
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+
+
         // Constructor
         public Driver(int driverId, string name, string contactNumber, string email, string nic, bool availability)
             : base(name, contactNumber, email, nic)
@@ -39,6 +46,7 @@ namespace CabManagementGUI
         {
             return $"Driver ID: {DriverId}\nName: {Name}\nContact Number: {ContactNumber}\nEmail: {Email}\nNIC: {NIC}\nAvailability: {Availability}";
         }
+
 
         // Method to add driver to the database
         public void AddDriver()
@@ -110,6 +118,45 @@ namespace CabManagementGUI
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
+        }
+
+        public static List<Driver> GetAvailableDrivers()
+        {
+            List<Driver> drivers = new List<Driver>();
+            DBConnector dbConnector = new DBConnector();
+            string query = "SELECT * FROM drivers WHERE availability = 1";
+
+            using (SqlConnection connection = dbConnector.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int driverId = reader.GetInt32(0);
+                                string name = reader.GetString(1);
+                                string contactNumber = reader.GetString(2);
+                                string email = reader.GetString(3);
+                                string nic = reader.GetString(4);
+                                bool availability = reader.GetBoolean(5);
+
+                                Driver driver = new Driver(driverId, name, contactNumber, email, nic, availability);
+                                drivers.Add(driver);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+
+            return drivers;
         }
     }
 }

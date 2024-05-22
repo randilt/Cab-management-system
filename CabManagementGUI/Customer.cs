@@ -11,20 +11,16 @@ namespace CabManagementGUI
     {
         private int _customerId;
 
-
-
         public int CustomerId
         {
             get { return _customerId; }
             set { _customerId = value; }
         }
 
-        
-
-
-        public Customer( string name, string contactNumber, string email, string nic)
+        public Customer(int customerId, string name, string contactNumber, string email, string nic)
             : base(name, contactNumber, email, nic)
         {
+            _customerId = customerId;
             Name = name;
             ContactNumber = contactNumber;
             Email = email;
@@ -68,7 +64,6 @@ namespace CabManagementGUI
                         if (rowsAffected > 0)
                         {
                             Console.WriteLine("Customer added successfully.");
-                         
                         }
                         else
                         {
@@ -83,5 +78,4 @@ namespace CabManagementGUI
             }
         }
     }
-    }
-
+}

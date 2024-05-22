@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -52,6 +53,28 @@ namespace CabManagementGUI
             return $"Model: {Model}\nPlate Number: {PlateNumber}\nAvailability: {Availability}";
         }
 
+        public static List<Car>GetAvailableCars()
+        {
+            DBConnector dbConnector = new DBConnector();
+            string query = "SELECT * FROM cars WHERE availability = 1";
+            List<Car> cars = new List<Car>();
+
+            using (SqlConnection connection = dbConnector.GetConnection())
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Car car = new Car(reader["model"].ToString(), reader["plate_number"].ToString(), Convert.ToBoolean(reader["availability"]));
+                        car.CarId = Convert.ToInt32(reader["car_id"]);
+                        cars.Add(car);
+                    }
+                }
+            }
+            return cars;
+        }
         // Method to update car availability
         public void UpdateAvailability(bool availability)
         {
@@ -135,5 +158,6 @@ namespace CabManagementGUI
                 }
             }
         }
+        
     }
 }
