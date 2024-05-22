@@ -47,7 +47,7 @@ namespace CabManagementGUI
                             form1.Hide();
 
                             // Show the HomeForm
-                            HomeForm homeForm = new HomeForm();
+                            AdminDashboard homeForm = new AdminDashboard();
                             homeForm.Show();
                         }
                     }

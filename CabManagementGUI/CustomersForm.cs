@@ -14,7 +14,7 @@ namespace CabManagementGUI
     public partial class CustomersForm : Form
     {
         SqlDataAdapter adpt;
-        DataTable dt;
+
         public CustomersForm()
         {
             InitializeComponent();
