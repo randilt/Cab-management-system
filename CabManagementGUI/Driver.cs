@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CabManagementGUI
 {
@@ -49,7 +50,7 @@ namespace CabManagementGUI
 
 
         // Method to add driver to the database
-        public void AddDriver()
+        public static void AddDriver(string DriverName, string DriverContactNumber, string DriverEmail, string DriverNIC, bool DriverAvailability )
         {
             DBConnector dbConnector = new DBConnector();
             string query = "INSERT INTO drivers (name, contact_number, email, nic, availability) VALUES (@Name, @ContactNumber, @Email, @NIC, @Availability)";
@@ -61,36 +62,35 @@ namespace CabManagementGUI
                     connection.Open();
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@Name", Name);
-                        cmd.Parameters.AddWithValue("@ContactNumber", ContactNumber);
-                        cmd.Parameters.AddWithValue("@Email", Email);
-                        cmd.Parameters.AddWithValue("@NIC", NIC);
-                        cmd.Parameters.AddWithValue("@Availability", Availability);
+                        cmd.Parameters.AddWithValue("@Name", DriverName);
+                        cmd.Parameters.AddWithValue("@ContactNumber", DriverContactNumber);
+                        cmd.Parameters.AddWithValue("@Email", DriverEmail);
+                        cmd.Parameters.AddWithValue("@NIC", DriverNIC);
+                        cmd.Parameters.AddWithValue("@Availability", DriverAvailability);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            Console.WriteLine("Driver added successfully.");
+                            MessageBox.Show("Driver added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            Console.WriteLine("Failed to add driver.");
+                            MessageBox.Show("Failed to add driver.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: " + ex.Message);
+                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        // Method to update driver availability
-        public void UpdateAvailability(bool availability)
+        // Method to remove driver
+        public static void RemoveDriver(int driverId)
         {
-            Availability = availability;
             DBConnector dbConnector = new DBConnector();
-            string query = "UPDATE drivers SET availability = @Availability WHERE driver_id = @DriverId";
+            string query = "DELETE FROM drivers WHERE driver_id = @DriverId";
 
             using (SqlConnection connection = dbConnector.GetConnection())
             {
@@ -99,23 +99,56 @@ namespace CabManagementGUI
                     connection.Open();
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@Availability", Availability);
-                        cmd.Parameters.AddWithValue("@DriverId", DriverId);
+                        cmd.Parameters.AddWithValue("@DriverId", driverId);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            Console.WriteLine("Driver availability updated successfully.");
+                            MessageBox.Show("Driver removed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            Console.WriteLine("Failed to update driver availability.");
+                           MessageBox.Show("Failed to remove driver.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: " + ex.Message);
+                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // Method to update driver availability
+        public static void UpdateAvailability(int driverId)
+        {
+
+            DBConnector dbConnector = new DBConnector();
+            string query = "UPDATE drivers SET availability = ~availability WHERE driver_id = @DriverId";
+
+            using (SqlConnection connection = dbConnector.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@DriverId", driverId);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Driver availability updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to update driver availability.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

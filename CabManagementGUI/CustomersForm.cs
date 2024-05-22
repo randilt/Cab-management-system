@@ -45,45 +45,7 @@ namespace CabManagementGUI
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string customerName = textBoxCustName.Text.Trim();
-            string customerNIC = textBoxCustNIC.Text.Trim();
-            string customerPhone = textBoxCustContact.Text.Trim();
-            string customerEmail = textBoxCustEmail.Text.Trim();
 
-            // Check if any of the fields are empty
-            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(customerNIC) || string.IsNullOrEmpty(customerPhone) || string.IsNullOrEmpty(customerEmail))
-            {
-                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                try
-                {
-                    // Create an instance of the Customer class with provided details
-                    Customer customer = new Customer(1,customerName, customerPhone, customerEmail, customerNIC);
-
-                    // Call the AddCustomer method to add the customer to the database
-                    customer.AddCustomer();
-
-                    // Show success message
-                    MessageBox.Show("Customer Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    textBoxCustName.Text = "";
-                    textBoxCustNIC.Text = "";
-                    textBoxCustContact.Text = "";
-                    textBoxCustEmail.Text = "";
-
-                    showCustomerData();
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error adding customer: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
 
         private void dataGridViewAllCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

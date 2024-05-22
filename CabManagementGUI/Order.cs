@@ -96,7 +96,7 @@ namespace CabManagementGUI
                         {
                             MessageBox.Show("Order has been placed successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Car.UpdateAvailability(false);
-                            Driver.UpdateAvailability(false);
+                            Driver.UpdateAvailability(Driver.DriverId);
                         }
                         else
                         {

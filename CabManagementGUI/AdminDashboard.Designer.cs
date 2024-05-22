@@ -45,11 +45,12 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(954, 12);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(554, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(92, 42);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Exit";
+            this.button1.Text = "Logout";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -130,19 +131,20 @@
             this.button5.TabIndex = 3;
             this.button5.Text = "Manage Drivers";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // HomeForm
+            // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 517);
+            this.ClientSize = new System.Drawing.Size(658, 517);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
-            this.Name = "HomeForm";
+            this.Name = "AdminDashboard";
             this.Text = "Welcome to Cab Management System";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
