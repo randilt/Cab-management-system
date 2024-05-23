@@ -76,11 +76,11 @@ namespace CabManagementGUI
             return cars;
         }
         // Method to update car availability
-        public void UpdateAvailability(bool availability)
+        public static void UpdateAvailability(int carId)
         {
-            Availability = availability;
+
             DBConnector dbConnector = new DBConnector();
-            string query = "UPDATE cars SET availability = @Availability WHERE car_id = @CarId";
+            string query = "UPDATE cars SET availability = ~availability WHERE car_id = @CarId";
 
             using (SqlConnection connection = dbConnector.GetConnection())
             {
@@ -89,8 +89,7 @@ namespace CabManagementGUI
                     connection.Open();
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@Availability", Availability);
-                        cmd.Parameters.AddWithValue("@CarId", CarId);
+                        cmd.Parameters.AddWithValue("@CarId", carId);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)

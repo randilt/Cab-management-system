@@ -56,22 +56,36 @@ namespace CabManagementGUI
 
         private void orderBtn_Click(object sender, EventArgs e)
         {
-            string CurrentLocation = textBoxPickupLocation.Text;
-            string Destination = textBoxDestination.Text;
-            DateTime OrderTime = dateTimePickerOrderTime.Value;
+            string currentLocation = textBoxPickupLocation.Text;
+            string destination = textBoxDestination.Text;
+            DateTime orderTime = dateTimePickerOrderTime.Value;
             Car selectedCar = (Car)cboAvailableCars.SelectedItem;
             Driver selectedDriver = (Driver)cboAvailableDrivers.SelectedItem;
 
-            Order order = new Order(CurrentLocation, Destination, OrderTime, selectedCar, selectedDriver, UserController.LoggedInCustomer.CustomerId);
-            order.SaveOrder();
-            showAvailableCars();
-            showAvailableDrivers();
+            if (selectedCar == null || selectedDriver == null)
+            {
+                MessageBox.Show("Please select both a car and a driver.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            
+            Order order = new Order(currentLocation, destination, orderTime, selectedCar, selectedDriver, UserController.LoggedInCustomer.CustomerId);
 
+            try
+            {
+                order.SaveOrder();
+                MessageBox.Show("Order placed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            
-
+                // Refresh available cars and drivers
+                showAvailableCars();
+                showAvailableDrivers();
+                cboAvailableCars.SelectedItem = null;
+                cboAvailableDrivers.SelectedItem = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to place the order: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
     }
 }

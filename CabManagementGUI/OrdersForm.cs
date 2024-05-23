@@ -7,14 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace CabManagementGUI
 {
     public partial class OrdersForm : Form
     {
+        SqlDataAdapter adpt;
         public OrdersForm()
         {
             InitializeComponent();
+        }
+
+        private void OrdersForm_Load(object sender, EventArgs e)
+        {
+            showAllOrders();
+        }
+
+        private void showAllOrders()
+        {
+            dataGridViewAllOrders.DataSource = Order.GetOrders();
+
+
         }
     }
 }

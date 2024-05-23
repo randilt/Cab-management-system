@@ -95,7 +95,7 @@ namespace CabManagementGUI
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Order has been placed successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Car.UpdateAvailability(false);
+                            Car.UpdateAvailability(Car.CarId);
                             Driver.UpdateAvailability(Driver.DriverId);
                         }
                         else
@@ -111,7 +111,7 @@ namespace CabManagementGUI
             }
         }
 
-        public DataTable GetOrders()
+        public static DataTable GetOrders()
         {
             DBConnector dbConnector = new DBConnector();
             string query = "SELECT * FROM orders";

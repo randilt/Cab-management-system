@@ -10,6 +10,7 @@ namespace CabManagementGUI
     public class Customer : Person
     {
         private int _customerId;
+        private string _password;
 
         public int CustomerId
         {
@@ -17,7 +18,7 @@ namespace CabManagementGUI
             set { _customerId = value; }
         }
 
-        public Customer(int customerId, string name, string contactNumber, string email, string nic)
+        public Customer(int customerId, string name, string contactNumber, string email, string nic, string password)
             : base(name, contactNumber, email, nic)
         {
             _customerId = customerId;
@@ -25,6 +26,7 @@ namespace CabManagementGUI
             ContactNumber = contactNumber;
             Email = email;
             NIC = nic;
+            _password = password;
         }
 
         public string GetDetails()
@@ -32,13 +34,13 @@ namespace CabManagementGUI
             return $"Customer ID: {CustomerId}\nName: {Name}\nContact Number: {ContactNumber}\nEmail: {Email}\nNIC: {NIC}";
         }
 
-        public void AddCustomer()
+        public static void AddCustomer(string customerName, string customerContactNo, string customerEmail, string customerNIC, string customerPassword)
         {
             // Create a new instance of DBConnector to obtain a database connection
             DBConnector dbConnector = new DBConnector();
 
             // Define the SQL query to insert a new customer
-            string query = "INSERT INTO customers (name, contact_number, email, nic) VALUES (@Name, @ContactNumber, @Email, @NIC)";
+            string query = "INSERT INTO customers (name, contact_number, email, nic, password) VALUES (@Name, @ContactNumber, @Email, @NIC, @Password)";
 
             // Create a SqlConnection object using the connection string obtained from DBConnector
             using (SqlConnection connection = dbConnector.GetConnection())
@@ -52,10 +54,11 @@ namespace CabManagementGUI
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         // Add parameters to the SqlCommand to prevent SQL injection
-                        cmd.Parameters.AddWithValue("@Name", this.Name);
-                        cmd.Parameters.AddWithValue("@ContactNumber", this.ContactNumber);
-                        cmd.Parameters.AddWithValue("@Email", this.Email);
-                        cmd.Parameters.AddWithValue("@NIC", this.NIC);
+                        cmd.Parameters.AddWithValue("@Name", customerName);
+                        cmd.Parameters.AddWithValue("@ContactNumber", customerContactNo);
+                        cmd.Parameters.AddWithValue("@Email", customerEmail);
+                        cmd.Parameters.AddWithValue("@NIC", customerNIC);
+                        cmd.Parameters.AddWithValue("@Password", customerPassword);
 
                         // Execute the SQL command to insert the customer
                         int rowsAffected = cmd.ExecuteNonQuery();

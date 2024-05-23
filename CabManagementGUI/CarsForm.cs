@@ -99,5 +99,14 @@ namespace CabManagementGUI
         {
            
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string carId = textBoxCarID.Text;
+            // Convert string to int
+            int carIdInt = Convert.ToInt32(carId);
+            Car.UpdateAvailability(carIdInt);
+            ShowCarsData();
+        }
     }
 }

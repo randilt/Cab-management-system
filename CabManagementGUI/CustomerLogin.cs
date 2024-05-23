@@ -55,7 +55,8 @@ namespace CabManagementGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            RegistrationForm registrationForm = new RegistrationForm();
+            registrationForm.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

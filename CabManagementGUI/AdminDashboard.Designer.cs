@@ -66,6 +66,7 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(6, 31);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(490, 52);
@@ -86,12 +87,14 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(6, 32);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(490, 52);
             this.button3.TabIndex = 1;
-            this.button3.Text = "Manage Orders";
+            this.button3.Text = "View All Orders";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // groupBox3
             // 
@@ -105,6 +108,7 @@
             // 
             // button4
             // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(6, 31);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(490, 52);
@@ -125,6 +129,7 @@
             // 
             // button5
             // 
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.Location = new System.Drawing.Point(6, 30);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(490, 52);

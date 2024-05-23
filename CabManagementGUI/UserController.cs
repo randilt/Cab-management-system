@@ -48,7 +48,7 @@ namespace CabManagementGUI
                                 string nic = reader.GetString(reader.GetOrdinal("nic"));
 
                                 // Initialize the LoggedInCustomer property
-                                LoggedInCustomer = new Customer(customerId, name, contactNumber, email, nic);
+                                LoggedInCustomer = new Customer(customerId, name, contactNumber, email, nic, password);
 
                                 MessageBox.Show("Authentication successful, please continue to the application.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
