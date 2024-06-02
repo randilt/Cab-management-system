@@ -13,7 +13,6 @@ namespace CabManagementGUI
 {
     public partial class CustomerDashboard : Form
     {
-        SqlDataAdapter adpt;
         public CustomerDashboard()
         {
             InitializeComponent();
@@ -27,19 +26,12 @@ namespace CabManagementGUI
         private void CustomerDashboard_Load(object sender, EventArgs e)
         {
             ShowMyOrders();
+            label1.Text = "Welcome, " + UserController.LoggedInCustomer.Name+ "!";
         }
 
         private void ShowMyOrders()
         {
-            DBConnector dbConnector = new DBConnector();
-            // Retrieve the ID of the currently logged-in customer
-            int loggedInCustomerId = UserController.LoggedInCustomer.CustomerId;
-            adpt = new SqlDataAdapter("SELECT * FROM orders WHERE customer_id = @CustomerId", dbConnector.GetConnection());
-            adpt.SelectCommand.Parameters.AddWithValue("@CustomerId", loggedInCustomerId);
-            DataTable dt = new DataTable();
-            adpt.Fill(dt);
-            dataGridViewMyOrders.DataSource = dt;
-            // Create a query to select orders placed by the logged-in customer
+            dataGridViewMyOrders.DataSource = Customer.ViewCustomerOrders(UserController.LoggedInCustomer);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -57,6 +49,11 @@ namespace CabManagementGUI
         private void button2_Click_1(object sender, EventArgs e)
         {
             ShowMyOrders();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -13,10 +13,13 @@ namespace CabManagementGUI
 {
     public partial class DriversForm : Form
     {
-        SqlDataAdapter adpt;
+        Admin admin;
+        DriverManager driverManager;
         public DriversForm()
         {
             InitializeComponent();
+            admin = new Admin();
+            driverManager = new DriverManager();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -31,11 +34,7 @@ namespace CabManagementGUI
 
         private void ShowDriversData()
         {
-            DBConnector dbConnector = new DBConnector();
-            adpt = new SqlDataAdapter("select * from drivers", dbConnector.GetConnection());
-            DataTable dt = new DataTable();
-            adpt.Fill(dt);
-            dataGridViewAllDrivers.DataSource = dt;
+            dataGridViewAllDrivers.DataSource = admin.ViewDrivers();
             
         }
 
@@ -50,8 +49,8 @@ namespace CabManagementGUI
                 bool driverAvailability = checkBoxDriverAvailability.Checked;
 
 
-
-                Driver.AddDriver(driverName, driverPhone, driverEmail, driverNIC, driverAvailability);
+                Driver driver = new Driver(driverName, driverPhone, driverEmail, driverNIC, driverAvailability);
+                driverManager.AddDriver(driver);
                 ShowDriversData();
 
             }
@@ -65,17 +64,23 @@ namespace CabManagementGUI
         {
          
                 int driverId = Convert.ToInt32(textBoxDriverID.Text);
-                Driver.UpdateAvailability(driverId);
+                try
+                {
+                       driverManager.UpdateAvailability(driverId);
+                       MessageBox.Show("Driver availability updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Failed to update driver availability.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 ShowDriversData();
         }
 
         private void buttonRemoveDriver_Click(object sender, EventArgs e)
         {
-           
                 int driverId = Convert.ToInt32(textBoxDriverID.Text);
-                Driver.RemoveDriver(driverId);
+                driverManager.RemoveDriver(driverId);
                 ShowDriversData();  
-
         }
     }
 }

@@ -14,43 +14,36 @@ namespace CabManagementGUI
     
     public partial class NewOrderForm : Form
     {
-        SqlDataAdapter adpt;
+        Admin admin;
         public NewOrderForm()
         {
             InitializeComponent();
+            admin = new Admin();
         }
 
         private void NewOrderForm_Load(object sender, EventArgs e)
         {
-            showAvailableDrivers();
+                showAvailableDrivers();
             showAvailableCars();
             
         }
 
         private void showAvailableCars()
         {
-            List<Car> cars = Car.GetAvailableCars();
+            List<Car> cars = CarManager.GetAvailableCars();
             cboAvailableCars.DataSource = cars;
             cboAvailableCars.DisplayMember = "Model";
-            DBConnector dbConnector = new DBConnector();
-            adpt = new SqlDataAdapter("SELECT * FROM cars WHERE availability = 1", dbConnector.GetConnection());
-            DataTable dt = new DataTable();
-            adpt.Fill(dt);
-            dataGridViewAvailableCars.DataSource = dt;
+            dataGridViewAvailableCars.DataSource = admin.ViewAvailableCars();
 
 
         }
 
         private void showAvailableDrivers()
         {
-            List<Driver> drivers = Driver.GetAvailableDrivers();
+            List<Driver> drivers = DriverManager.GetAvailableDrivers();
             cboAvailableDrivers.DataSource = drivers;
             cboAvailableDrivers.DisplayMember = "DriverName";
-            DBConnector dbConnector = new DBConnector();
-            adpt = new SqlDataAdapter("SELECT * FROM drivers WHERE availability = 1", dbConnector.GetConnection());
-            DataTable dt = new DataTable();
-            adpt.Fill(dt);
-            dataGridViewAvailableDrivers.DataSource = dt;
+            dataGridViewAvailableDrivers.DataSource = admin.ViewAvailableDrivers();
 
         }
 
@@ -73,8 +66,6 @@ namespace CabManagementGUI
             try
             {
                 order.SaveOrder();
-                MessageBox.Show("Order placed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 // Refresh available cars and drivers
                 showAvailableCars();
                 showAvailableDrivers();
@@ -87,5 +78,9 @@ namespace CabManagementGUI
             }
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

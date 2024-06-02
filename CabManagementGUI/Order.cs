@@ -74,6 +74,8 @@ namespace CabManagementGUI
 
         public void SaveOrder()
         {
+            CarManager carManager = new CarManager();
+            DriverManager driverManager = new DriverManager();
             DBConnector dbConnector = new DBConnector();
             string query = "INSERT INTO orders (current_location, customer_id, destination, order_date, car_id, driver_id) VALUES (@CurrentLocation, @CustomerId, @Destination, @OrderDate, @CarId, @DriverId)";
 
@@ -94,9 +96,9 @@ namespace CabManagementGUI
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Order has been placed successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Car.UpdateAvailability(Car.CarId);
-                            Driver.UpdateAvailability(Driver.DriverId);
+                            MessageBox.Show("Order has been placed successfully! Thank you, " + UserController.LoggedInCustomer.Name + "!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            carManager.UpdateAvailability(Car.CarId);
+                            driverManager.UpdateAvailability(Driver.DriverId);
                         }
                         else
                         {
@@ -107,24 +109,6 @@ namespace CabManagementGUI
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error placing order: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        public static DataTable GetOrders()
-        {
-            DBConnector dbConnector = new DBConnector();
-            string query = "SELECT * FROM orders";
-
-            using (SqlConnection connection = dbConnector.GetConnection())
-            {
-                connection.Open();
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-                    return dt;
                 }
             }
         }

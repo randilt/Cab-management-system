@@ -9,7 +9,7 @@ namespace CabManagementGUI
 {
     internal class DBConnector
     {
-        private static string FILE_PATH = @"C:\Users\testl\Desktop\SDAM_Assignment\CabManagementSystem\CabManagementDB.mdf"; // replace the path with the path to the database file on your system
+        private static string FILE_PATH = @"C:\Users\testl\Desktop\SDAM_Assignment\CabManagementSystem\CabManagementDB.mdf"; // replace the path with the path to the database file 
         private string DB_CONNECTION_STRING = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + FILE_PATH + ";Integrated Security=True";
 
         // method to return connection to other classes to connect to the database

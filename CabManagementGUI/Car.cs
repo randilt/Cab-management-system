@@ -18,7 +18,7 @@ namespace CabManagementGUI
         public int CarId
         {
             get { return _carId; }
-            private set { _carId = value; }
+            set { _carId = value; }
         }
 
         public string Model
@@ -53,110 +53,7 @@ namespace CabManagementGUI
             return $"Model: {Model}\nPlate Number: {PlateNumber}\nAvailability: {Availability}";
         }
 
-        public static List<Car>GetAvailableCars()
-        {
-            DBConnector dbConnector = new DBConnector();
-            string query = "SELECT * FROM cars WHERE availability = 1";
-            List<Car> cars = new List<Car>();
-
-            using (SqlConnection connection = dbConnector.GetConnection())
-            {
-                connection.Open();
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Car car = new Car(reader["model"].ToString(), reader["plate_number"].ToString(), Convert.ToBoolean(reader["availability"]));
-                        car.CarId = Convert.ToInt32(reader["car_id"]);
-                        cars.Add(car);
-                    }
-                }
-            }
-            return cars;
-        }
-        // Method to update car availability
-        public static void UpdateAvailability(int carId)
-        {
-
-            DBConnector dbConnector = new DBConnector();
-            string query = "UPDATE cars SET availability = ~availability WHERE car_id = @CarId";
-
-            using (SqlConnection connection = dbConnector.GetConnection())
-            {
-                try
-                {
-                    connection.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@CarId", carId);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Car availability status updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Car availability update failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        // Method to search for cars
-        public static DataTable SearchCars(string searchValue, bool isModelSelected, bool isPlateNumberSelected, bool isCarIDSelected)
-        {
-            DBConnector dbConnector = new DBConnector();
-            string query = "";
-
-            if (isModelSelected)
-            {
-                query = "SELECT * FROM cars WHERE model LIKE @SearchValue";
-            }
-            else if (isPlateNumberSelected)
-            {
-                query = "SELECT * FROM cars WHERE plate_number LIKE @SearchValue";
-            }
-            else if (isCarIDSelected)
-            {
-                if (int.TryParse(searchValue, out int carId))
-                {
-                    query = "SELECT * FROM cars WHERE car_id = @SearchValue";
-                    searchValue = carId.ToString(); // Use the parsed carId
-                }
-                else
-                {
-                    throw new ArgumentException("Please enter a valid Car ID.");
-                }
-            }
-
-            using (SqlConnection connection = dbConnector.GetConnection())
-            {
-                connection.Open();
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    if (isCarIDSelected)
-                    {
-                        cmd.Parameters.AddWithValue("@SearchValue", searchValue);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
-                    }
-
-                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    adpt.Fill(dt);
-                    return dt;
-                }
-            }
-        }
+       
         
     }
 }

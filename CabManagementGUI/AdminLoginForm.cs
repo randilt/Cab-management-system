@@ -20,12 +20,11 @@ namespace CabManagementGUI
         private void button1_Click(object sender, EventArgs e)
         {
 
-            UserController userController = new UserController(null);
+            UserController userController = new UserController(this);
             string username = textBoxUsername.Text.ToString();
             string password = textBoxPassword.Text.ToString();
 
             userController.AuthenticateUser(username, password);
-            this.Hide();
 
 
         }

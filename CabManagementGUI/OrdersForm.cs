@@ -13,7 +13,6 @@ namespace CabManagementGUI
 {
     public partial class OrdersForm : Form
     {
-        SqlDataAdapter adpt;
         public OrdersForm()
         {
             InitializeComponent();
@@ -26,7 +25,8 @@ namespace CabManagementGUI
 
         private void showAllOrders()
         {
-            dataGridViewAllOrders.DataSource = Order.GetOrders();
+            Admin admin = new Admin();
+            dataGridViewAllOrders.DataSource = admin.ViewOrders();
 
 
         }

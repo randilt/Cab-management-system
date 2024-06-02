@@ -7,13 +7,13 @@ namespace CabManagementGUI
 {
     public partial class CarsForm : Form
     {
-        SqlDataAdapter adpt;
-        DataTable dt;
+        CarManager carManager;
         Admin admin;
 
         public CarsForm()
         {
             InitializeComponent();
+            carManager = new CarManager();
             admin = new Admin();
         }
 
@@ -24,11 +24,7 @@ namespace CabManagementGUI
 
         private void ShowCarsData()
         {
-            DBConnector dbConnector = new DBConnector();
-            adpt = new SqlDataAdapter("SELECT * FROM cars", dbConnector.GetConnection());
-            dt = new DataTable();
-            adpt.Fill(dt);
-            dataGridViewAllCars.DataSource = dt;
+            dataGridViewAllCars.DataSource = admin.ViewCars();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,7 +41,8 @@ namespace CabManagementGUI
             }
             else
             {
-                admin.AddCar(carModel, carPlateNumber, carAvailability);
+                Car car = new Car(carModel, carPlateNumber, carAvailability);
+                carManager.AddCar(car);
                 ShowCarsData();
             }
         }
@@ -66,7 +63,7 @@ namespace CabManagementGUI
             {
                 try
                 {
-                    DataTable dt = Car.SearchCars(searchValue, isModelSelected, isPlateNumberSelected, isCarIDSelected);
+                    DataTable dt = admin.SearchCars(searchValue, isModelSelected, isPlateNumberSelected, isCarIDSelected);
 
                     if (dt.Rows.Count > 0)
                     {
@@ -91,7 +88,7 @@ namespace CabManagementGUI
             string carId = textBoxCarID.Text;
             // Convert string to int
             int carIdInt = Convert.ToInt32(carId);
-            admin.RemoveCar(carIdInt);
+            carManager.RemoveCar(carIdInt);
             ShowCarsData();
         }
 
@@ -105,7 +102,8 @@ namespace CabManagementGUI
             string carId = textBoxCarID.Text;
             // Convert string to int
             int carIdInt = Convert.ToInt32(carId);
-            Car.UpdateAvailability(carIdInt);
+            carManager.UpdateAvailability(carIdInt);
+            MessageBox.Show("Car availability updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); 
             ShowCarsData();
         }
     }

@@ -37,7 +37,6 @@ namespace CabManagementGUI
             string password = textBoxPassword.Text.ToString();
 
             userController.AuthenticateCustomer(username, password);
-            this.Hide();
             
 
 

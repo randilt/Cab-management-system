@@ -8,67 +8,19 @@ namespace CabManagementGUI
     internal class Admin
     {
         private DBConnector dbConnector;
-
+    
         public Admin()
         {
             dbConnector = new DBConnector();
         }
 
-        // Method to add a new car
-        public void AddCar(string model, string plateNumber, bool availability)
+
+  
+        // Method to viw customers
+        public DataTable ViewCustomers()
         {
-            string queryCheckPlateNumber = "SELECT COUNT(*) FROM cars WHERE plate_number = @PlateNumber";
-            string queryAddCar = "INSERT INTO cars (model, plate_number, availability) VALUES (@Model, @PlateNumber, @Availability)";
-
-            using (SqlConnection connection = dbConnector.GetConnection())
-            {
-                try
-                {
-                    connection.Open();
-
-                    // Check if the plate number already exists
-                    using (SqlCommand cmdCheckPlateNumber = new SqlCommand(queryCheckPlateNumber, connection))
-                    {
-                        cmdCheckPlateNumber.Parameters.AddWithValue("@PlateNumber", plateNumber);
-                        int count = (int)cmdCheckPlateNumber.ExecuteScalar();
-
-                        if (count > 0)
-                        {
-                            MessageBox.Show("Plate number already exists. Please use a different plate number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return; // Exit the method if plate number is not unique
-                        }
-                    }
-
-                    // Insert the new car if plate number is unique
-                    using (SqlCommand cmdAddCar = new SqlCommand(queryAddCar, connection))
-                    {
-                        cmdAddCar.Parameters.AddWithValue("@Model", model);
-                        cmdAddCar.Parameters.AddWithValue("@PlateNumber", plateNumber);
-                        cmdAddCar.Parameters.AddWithValue("@Availability", availability);
-
-                        int rowsAffected = cmdAddCar.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Car added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to add car.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-
-        // Method to remove a car by its ID
-        public void RemoveCar(int carId)
-        {
-            string query = "DELETE FROM cars WHERE car_id = @CarId";
+            string query = "SELECT * FROM customers";
+            DataTable dt = new DataTable();
 
             using (SqlConnection connection = dbConnector.GetConnection())
             {
@@ -77,17 +29,8 @@ namespace CabManagementGUI
                     connection.Open();
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@CarId", carId);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Car removed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to remove car.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                        adpt.Fill(dt);
                     }
                 }
                 catch (Exception ex)
@@ -95,6 +38,34 @@ namespace CabManagementGUI
                     MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+            return dt;
+        }
+
+        // Method to view all cars
+        public DataTable ViewCars()
+        {
+            string query = "SELECT * FROM cars";
+            DataTable dt = new DataTable();
+
+            using (SqlConnection connection = dbConnector.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                        adpt.Fill(dt);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return dt;
         }
 
         // Method to view available cars
@@ -123,10 +94,12 @@ namespace CabManagementGUI
             return dt;
         }
 
-        // Method to add a new driver
-        public void AddDriver(string name, string contactNumber, bool availability)
+        // Method to view all drivers
+
+        public DataTable ViewDrivers()
         {
-            string query = "INSERT INTO drivers (name, contact_number, availability) VALUES (@Name, @ContactNumber, @Availability)";
+            string query = "SELECT * FROM drivers";
+            DataTable dt = new DataTable();
 
             using (SqlConnection connection = dbConnector.GetConnection())
             {
@@ -135,19 +108,8 @@ namespace CabManagementGUI
                     connection.Open();
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@Name", name);
-                        cmd.Parameters.AddWithValue("@ContactNumber", contactNumber);
-                        cmd.Parameters.AddWithValue("@Availability", availability);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Driver added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to add driver.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                        adpt.Fill(dt);
                     }
                 }
                 catch (Exception ex)
@@ -155,38 +117,8 @@ namespace CabManagementGUI
                     MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
 
-        // Method to remove a driver by their ID
-        public void RemoveDriver(int driverId)
-        {
-            string query = "DELETE FROM drivers WHERE driver_id = @DriverId";
-
-            using (SqlConnection connection = dbConnector.GetConnection())
-            {
-                try
-                {
-                    connection.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@DriverId", driverId);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Driver removed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to remove driver.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            return dt;
         }
 
         // Method to view available drivers
@@ -239,6 +171,114 @@ namespace CabManagementGUI
             }
 
             return dt;
+        }
+
+        // Method to search for cars
+        public DataTable SearchCars(string searchValue, bool isModelSelected, bool isPlateNumberSelected, bool isCarIDSelected)
+        {
+            string query = "";
+
+            if (isModelSelected)
+            {
+                query = "SELECT * FROM cars WHERE model LIKE @SearchValue";
+            }
+            else if (isPlateNumberSelected)
+            {
+                query = "SELECT * FROM cars WHERE plate_number LIKE @SearchValue";
+            }
+            else if (isCarIDSelected)
+            {
+                if (int.TryParse(searchValue, out int carId))
+                {
+                    query = "SELECT * FROM cars WHERE car_id = @SearchValue";
+                    searchValue = carId.ToString(); // Use the parsed carId
+                }
+                else
+                {
+                    throw new ArgumentException("Please enter a valid Car ID.");
+                }
+            }
+
+            using (SqlConnection connection = dbConnector.GetConnection())
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    if (isCarIDSelected)
+                    {
+                        cmd.Parameters.AddWithValue("@SearchValue", searchValue);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
+                    }
+
+                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adpt.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        // search for customers
+
+        public DataTable SearchCustomers(string searchValue, string searchCriteria)
+        {
+            string query = "SELECT * FROM customers";
+            DataTable dt = new DataTable();
+
+            using (SqlConnection connection = dbConnector.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+                    SqlDataAdapter adpt = new SqlDataAdapter(query, connection);
+                    adpt.Fill(dt);
+
+                    string filterExpression = string.Empty;
+
+                    switch (searchCriteria)
+                    {
+                        case "name":
+                            filterExpression = $"name LIKE '%{searchValue}%'";
+                            break;
+                        case "customer_id":
+                            if (int.TryParse(searchValue, out int customerId))
+                            {
+                                filterExpression = $"customer_id = {customerId}";
+                            }
+                            else
+                            {
+                                throw new ArgumentException("Invalid Customer ID");
+                            }
+                            break;
+                        case "contact_number":
+                            filterExpression = $"contact_number LIKE '%{searchValue}%'";
+                            break;
+                        case "email":
+                            filterExpression = $"email LIKE '%{searchValue}%'";
+                            break;
+                        default:
+                            throw new ArgumentException("Invalid search criteria");
+                    }
+
+                    DataRow[] result = dt.Select(filterExpression);
+
+                    if (result.Length > 0)
+                    {
+                        return result.CopyToDataTable();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error searching customers: " + ex.Message);
+                }
+            }
         }
     }
 }

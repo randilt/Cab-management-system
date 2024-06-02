@@ -31,8 +31,9 @@ namespace CabManagementGUI
             }
             else
             {
+                Customer customer = new Customer(name, contactNumber, email, nic, password);
         
-                Customer.AddCustomer(name,contactNumber,email,nic, password);
+                Customer.AddCustomer(customer);
                 MessageBox.Show("Customer added successfully, Please Login to the application now!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
             }

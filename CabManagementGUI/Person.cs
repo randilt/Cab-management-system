@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CabManagementGUI
 {
-    public class Person
+    public abstract class Person
     {
         private string _name;
         private string _contactNumber;

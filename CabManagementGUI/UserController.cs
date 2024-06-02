@@ -11,11 +11,18 @@ namespace CabManagementGUI
 {
     internal class UserController
     {
+        CustomerLogin form1;
+        AdminLoginForm adminLoginForm;
         public static Customer LoggedInCustomer { get; private set; } // Store the logged-in customer
         public UserController(CustomerLogin form1)
         {
-
+            this.form1 = form1;
         }
+        public UserController(AdminLoginForm adminLoginForm)
+        {
+            this.adminLoginForm = adminLoginForm;
+        }
+
 
 
         // Method to authenticate a customer
@@ -54,7 +61,9 @@ namespace CabManagementGUI
 
 
                                 CustomerDashboard customerDashboard = new CustomerDashboard();
+                                form1.Hide();
                                 customerDashboard.Show();
+
                             }
                         }
                         else
@@ -112,6 +121,7 @@ namespace CabManagementGUI
                                 {
                                     // Show the AdminForm if the user's role is an admin
                                     AdminDashboard adminDashboard = new AdminDashboard();
+                                    adminLoginForm.Hide();
                                     adminDashboard.Show();
                                 }
                                 else
